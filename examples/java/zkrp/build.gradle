@@ -17,6 +17,16 @@ repositories {
     }
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "com.ing.blockchain.zk.demo.ProverDemo"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
 
 dependencies {
     compile "org.bouncycastle:bcprov-jdk15on:1.55"
