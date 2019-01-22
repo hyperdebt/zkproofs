@@ -28,15 +28,16 @@ public class JavaScriptRangeProof {
         return new String[]{BRP_string, c_string, a, b};
     }
 
-    public static Boolean verify(String json){
+    public static Boolean verify(String BRP_string, String c_string, String range_string){
+        System.out.println(BRP_string);
         ObjectMapper objectMapper = new ObjectMapper();
         BoudotRangeProof BRP = null;
         Commitment c = null;
         ClosedRange range = null;
         try {
-            BRP = objectMapper.readValue(json, BoudotRangeProof.class);
-            c = objectMapper.readValue(json, Commitment.class);
-            range = objectMapper.readValue(json, ClosedRange.class);
+            BRP = objectMapper.readValue(BRP_string, BoudotRangeProof.class);
+            c = objectMapper.readValue(c_string, Commitment.class);
+            range = objectMapper.readValue(range_string, ClosedRange.class);
             RangeProof.validateRangeProof(BRP, c, range);
         }catch(Exception e){
             e.printStackTrace();
