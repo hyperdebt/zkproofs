@@ -1,5 +1,6 @@
 package com.ing.blockchain.zk;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ing.blockchain.zk.dto.*;
 
 import java.io.*;
@@ -27,18 +28,23 @@ public class JavaScriptRangeProof {
         return new String[]{BRP_string, c_string, a, b};
     }
 
-    public static void verify(String[] proof){
+    public static Boolean verify(String json){
+        ObjectMapper objectMapper = new ObjectMapper();
         BoudotRangeProof BRP = null;
         Commitment c = null;
+        ClosedRange range = null;
         try {
-            BRP = (BoudotRangeProof) fromString(proof[0]);
-            c = (Commitment) fromString(proof[1]);
-        }catch(IOException | ClassNotFoundException e){
+            BRP = objectMapper.readValue(json, BoudotRangeProof.class);
+            c = objectMapper.readValue(json, Commitment.class);
+            range = objectMapper.readValue(json, ClosedRange.class);
+            RangeProof.validateRangeProof(BRP, c, range);
+        }catch(Exception e){
             e.printStackTrace();
+            System.out.println("Proof failed");
+            return false;
         }
-        ClosedRange range = ClosedRange.of(proof[2], proof[3]);
-        RangeProof.validateRangeProof(BRP, c, range);
         System.out.println("Proof has succeeded");
+        return true;
     }
 
     /**
