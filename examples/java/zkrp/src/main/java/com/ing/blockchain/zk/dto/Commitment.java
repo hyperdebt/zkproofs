@@ -19,12 +19,19 @@
 
 package com.ing.blockchain.zk.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
 public class Commitment implements Serializable {
+    @JsonProperty("group")
     private SecretOrderGroup group;
+    @JsonProperty("commitmentValue")
     private BigInteger commitmentValue;
+
+    public Commitment() {
+    }
 
     public Commitment (SecretOrderGroup group, BigInteger commitmentValue) {
         this.group = group;

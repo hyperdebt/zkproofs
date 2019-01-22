@@ -19,14 +19,28 @@
 
 package com.ing.blockchain.zk.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
 public class BoudotRangeProof implements Serializable {
 
-    private SquareProof sqrProofLeft, sqrProofRight;
-    private CFTProof cftProofLeft, cftProofRight;
-    private BigInteger cLeftSquare, cRightSquare;
+    @JsonProperty("sqrProofLeft")
+    private SquareProof sqrProofLeft;
+    @JsonProperty("sqrProofRight")
+    private SquareProof sqrProofRight;
+    @JsonProperty("cftProofLeft")
+    private CFTProof cftProofLeft;
+    @JsonProperty("cftProofRight")
+    private CFTProof cftProofRight;
+    @JsonProperty("cleftSquare")
+    private BigInteger cLeftSquare;
+    @JsonProperty("crightSquare")
+    private BigInteger cRightSquare;
+
+    public BoudotRangeProof() {
+    }
 
     public BoudotRangeProof(BigInteger cLeftSquare, BigInteger cRightSquare, SquareProof sqrProofLeft,
                             SquareProof sqrProofRight, CFTProof cftProofLeft, CFTProof cftProofRight) {

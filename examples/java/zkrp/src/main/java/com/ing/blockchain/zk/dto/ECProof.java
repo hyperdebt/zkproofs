@@ -19,11 +19,23 @@
 
 package com.ing.blockchain.zk.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
 public class ECProof implements Serializable {
-    private BigInteger c, D, D1, D2;
+    @JsonProperty("c")
+    private BigInteger c;
+    @JsonProperty("d")
+    private BigInteger D;
+    @JsonProperty("d1")
+    private BigInteger D1;
+    @JsonProperty("d2")
+    private BigInteger D2;
+
+    public ECProof() {
+    }
 
     public ECProof(BigInteger c, BigInteger D, BigInteger D1, BigInteger D2) {
         this.c = c;   // Challenge for prover

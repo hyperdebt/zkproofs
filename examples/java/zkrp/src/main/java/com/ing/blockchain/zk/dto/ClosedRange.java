@@ -25,8 +25,11 @@ import java.math.BigInteger;
  * Closed interval of big integers.
  */
 public class ClosedRange {
-    private final BigInteger start;
-    private final BigInteger end;
+    private BigInteger start;
+    private BigInteger end;
+
+    public ClosedRange() {
+    }
 
     private ClosedRange(final BigInteger lo, final BigInteger hi) {
         start = lo;

@@ -19,6 +19,8 @@
 
 package com.ing.blockchain.zk.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -26,10 +28,15 @@ import java.math.BigInteger;
 public class SquareProof implements Serializable {
 
     // Commitment to the root of the square (x)
+    @JsonProperty("f")
     private BigInteger F;
 
     // Proof that two commitments hide the same value x
+    @JsonProperty("ecproof")
     private ECProof ecProof;
+
+    public SquareProof() {
+    }
 
     public SquareProof(BigInteger F, ECProof ecProof) {
         this.F = F;

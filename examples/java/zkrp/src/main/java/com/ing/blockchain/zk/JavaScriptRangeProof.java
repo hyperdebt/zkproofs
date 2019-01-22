@@ -29,15 +29,21 @@ public class JavaScriptRangeProof {
     }
 
     public static Boolean verify(String BRP_string, String c_string, String range_string){
-        System.out.println(BRP_string);
         ObjectMapper objectMapper = new ObjectMapper();
-        BoudotRangeProof BRP = null;
-        Commitment c = null;
-        ClosedRange range = null;
+        BoudotRangeProof BRP;
+        Commitment c;
+        ClosedRange range;
+        ProofWrapper proofWrapper;
+        CommitmentWrapper commitmentWrapper;
+        RangeWrapper rangeWrapper;
+
         try {
-            BRP = objectMapper.readValue(BRP_string, BoudotRangeProof.class);
-            c = objectMapper.readValue(c_string, Commitment.class);
-            range = objectMapper.readValue(range_string, ClosedRange.class);
+            proofWrapper = objectMapper.readValue(BRP_string, ProofWrapper.class);
+            BRP = proofWrapper.getProof();
+            commitmentWrapper = objectMapper.readValue(c_string, CommitmentWrapper.class);
+            c = commitmentWrapper.getCommitment();
+            rangeWrapper = objectMapper.readValue(range_string, RangeWrapper.class);
+            range = rangeWrapper.getClosedRange();
             RangeProof.validateRangeProof(BRP, c, range);
         }catch(Exception e){
             e.printStackTrace();

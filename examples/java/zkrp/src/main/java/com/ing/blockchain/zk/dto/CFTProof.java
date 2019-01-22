@@ -19,12 +19,22 @@
 
 package com.ing.blockchain.zk.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
 public class CFTProof implements Serializable {
 
-    private BigInteger C, D1, D2;
+    @JsonProperty("c")
+    private BigInteger C;
+    @JsonProperty("d1")
+    private BigInteger D1;
+    @JsonProperty("d2")
+    private BigInteger D2;
+
+    public CFTProof() {
+    }
 
     public CFTProof(BigInteger c, BigInteger D1, BigInteger D2) {
         this.C = c;
